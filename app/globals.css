@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Root Variables ─────────────────────────────────────────── */
+:root {
+  --font-playfair: 'Playfair Display', serif;
+  --font-sans: 'Outfit', sans-serif;
+}
+
+/* ─── Base ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-color: #0F0F0F;
+  color: #FAF6EE;
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0F0F0F; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #C5A880; }
+
+/* ─── Typography ────────────────────────────────────────────── */
+.font-playfair,
+.font-playfair * {
+  font-family: 'Playfair Display', serif !important;
+}
+
+.gradient-text-saffron {
+  background: linear-gradient(135deg, #FF7A00 0%, #FFB347 60%, #C5A880 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #E2D4C1 0%, #937854 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glassmorphism ─────────────────────────────────────────── */
+.glassmorphism {
+  background: rgba(14, 14, 14, 0.78) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(197, 168, 128, 0.14) !important;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────── */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(197, 168, 128, 0.4);
+  background-color: transparent;
+  color: #FAF6EE;
+  transition: all 0.35s ease;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.btn-premium:hover {
+  border-color: #FF7A00;
+  color: #FF7A00;
+  box-shadow: 0 0 20px rgba(255, 122, 0, 0.15);
+}
+
+.btn-premium-filled {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #FF7A00 0%, #CC6200 100%);
+  color: #0F0F0F;
+  font-weight: 700;
+  border: 1px solid transparent;
+  transition: all 0.35s ease;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(255, 122, 0, 0.28);
+}
+.btn-premium-filled:hover {
+  background: linear-gradient(135deg, #FF9A30 0%, #FF7A00 100%);
+  box-shadow: 0 6px 28px rgba(255, 122, 0, 0.42);
+  transform: translateY(-1px);
+}
+
+/* ─── Ambient Glows ─────────────────────────────────────────── */
+@keyframes ambientFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  50%       { transform: translate(25px, -18px) scale(1.06); opacity: 0.7; }
+}
+
+.ambient-glow-saffron {
+  background: radial-gradient(circle, rgba(255, 122, 0, 0.16) 0%, transparent 70%);
+  animation: ambientFloat 10s ease-in-out infinite;
+}
+
+.ambient-glow-maroon {
+  background: radial-gradient(circle, rgba(110, 25, 18, 0.2) 0%, transparent 70%);
+  animation: ambientFloat 14s ease-in-out infinite reverse;
+}
+
+/* ─── Section Divider ───────────────────────────────────────── */
+.section-divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, #FF7A00, #C5A880);
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+/* ─── Form Inputs ───────────────────────────────────────────── */
+.form-input {
+  width: 100%;
+  background: rgba(15, 15, 15, 0.8);
+  border: 1px solid rgba(197, 168, 128, 0.18);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 13px;
+  color: #FAF6EE;
+  font-family: 'Outfit', sans-serif;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.form-input::placeholder { color: rgba(250, 246, 238, 0.3); }
+.form-input:focus { border-color: #FF7A00; }
+
+/* ─── Custom Cursor ─────────────────────────────────────────── */
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background-color: #C5A880;
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease;
+}
+.custom-cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(197, 168, 128, 0.4);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9998;
+}
+body.cursor-hover .custom-cursor { width: 14px; height: 14px; background-color: #FF7A00; }
+body.cursor-hover .custom-cursor-ring { width: 48px; height: 48px; border-color: rgba(255, 122, 0, 0.5); }
+
+/* ─── Lenis ─────────────────────────────────────────────────── */
+html.lenis { height: auto; }
+.lenis-smooth { scroll-behavior: auto !important; }
+
+.review-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 48px;
+  align-items: start;
+}
+
+.review-sidebar {
+  position: sticky;
+  top: 112px;
+}
+
+@media (max-width: 960px) {
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .review-grid .review-sidebar {
+    position: static;
+    top: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .review-grid {
+    gap: 24px;
+  }
+}
+
+.review-hero {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  padding-top: 120px;
+  padding-bottom: 64px;
+}
+
+@media (max-width: 640px) {
+  .review-hero {
+    padding-top: 72px;
+    padding-bottom: 32px;
+  }
+}

@@ -1,0 +1,119 @@
+/* Custom Animations for Raju Madras Cafe */
+
+/* Ambient glows */
+@keyframes ambientGlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(30px, -20px) scale(1.1);
+  }
+}
+
+.ambient-glow-saffron {
+  background: radial-gradient(circle, rgba(255, 122, 0, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+  animation: ambientGlow 8s ease-in-out infinite;
+}
+
+.ambient-glow-maroon {
+  background: radial-gradient(circle, rgba(94, 25, 20, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+  animation: ambientGlow 12s ease-in-out infinite alternate;
+}
+
+/* Glassmorphism panel styling */
+.glassmorphism {
+  background: rgba(18, 18, 18, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(197, 168, 128, 0.12);
+}
+
+.glassmorphism-light {
+  background: rgba(250, 246, 238, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 168, 128, 0.2);
+}
+
+/* Text reveals */
+.char-reveal {
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* Custom cursor */
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background-color: #C5A880;
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+}
+
+.custom-cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(197, 168, 128, 0.35);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.15s ease-out, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover effects for custom cursor */
+.cursor-hover .custom-cursor {
+  width: 12px;
+  height: 12px;
+  background-color: #FF7A00;
+}
+
+.cursor-hover .custom-cursor-ring {
+  width: 50px;
+  height: 50px;
+  border-color: rgba(255, 122, 0, 0.6);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Custom scroll bar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0F0F0F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222222;
+  border-radius: 4px;
+  border: 1px solid rgba(197, 168, 128, 0.08);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C5A880;
+}
+
+/* Lenis CSS integration */
+html.lenis {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overflow: clip;
+}
+
+.lenis-prevent {
+  overscroll-behavior: contain;
+}
