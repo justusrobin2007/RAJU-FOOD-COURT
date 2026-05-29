@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, MapPin, Clock, Mail, CheckCircle, ArrowUpRight } from 'lucide-react';
+import { Phone, MapPin, Clock, Mail, CheckCircle } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -161,32 +161,6 @@ export default function Contact() {
             </form>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.7 }}
-          className="glassmorphism p-8 rounded-3xl max-w-3xl mx-auto mb-16"
-        >
-          <div className="space-y-6 text-center">
-            <div>
-              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-cream tracking-tight">
-                Enjoyed dining with us?
-              </h2>
-              <p className="mt-3 text-sm text-cream/60 max-w-xl mx-auto">
-                Your Google review helps other food lovers discover us.
-              </p>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => window.open('https://www.google.com/search?q=Raju+Food+Court+Rajkot+reviews', '_blank')}
-              className="btn-premium-filled inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs uppercase tracking-[0.18em] mx-auto"
-            >
-              <ArrowUpRight className="w-4 h-4" />
-              Write a Google Review
-            </button>
-          </div>
-        </motion.div>
 
         {/* Map — exact Raju Food Court location */}
         <motion.div
