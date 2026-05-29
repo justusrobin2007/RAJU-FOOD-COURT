@@ -17,8 +17,7 @@ prisma/dev.db
 prisma/dev.db-journal
 prisma/migrations/
 
-# Uploads (local only — use Supabase Storage in production)
-public/images/uploads/
+
 
 # Misc
 .DS_Store
