@@ -106,8 +106,8 @@ export default function Home() {
               className="relative rounded-2xl overflow-hidden border border-gold/12 aspect-[4/5]"
             >
               <Image
-                src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=800&auto=format&fit=crop"
-                alt="Madras Cafe kitchen heritage"
+                src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=800&auto=format&fit=crop"
+                alt="Crispy golden dosa"
                 fill unoptimized className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal-dark/85 to-transparent" />
