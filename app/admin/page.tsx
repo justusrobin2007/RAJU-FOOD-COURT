@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import {
   PackagePlus, CheckCircle, XCircle, Trash2, ShieldAlert,
-  List, Upload, X, LogOut, Pencil, Eye, EyeOff,
+  List, Upload, X, LogOut, Pencil, Eye, EyeOff, Search,
 } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 
@@ -61,10 +61,12 @@ export default function AdminDashboard() {
   const galleryInputRef = useRef<HTMLInputElement>(null);
 
   // Manage-menu per-item state
-  const [editingId, setEditingId]   = useState<string | null>(null);
-  const [editState, setEditState]   = useState<EditState | null>(null);
-  const [editSaving, setEditSaving] = useState(false);
-  const [togglingId, setTogglingId] = useState<string | null>(null);
+  const [editingId, setEditingId]       = useState<string | null>(null);
+  const [editState, setEditState]       = useState<EditState | null>(null);
+  const [editSaving, setEditSaving]     = useState(false);
+  const [togglingId, setTogglingId]     = useState<string | null>(null);
+  const [menuSearch, setMenuSearch]     = useState('');
+  const [menuFilter, setMenuFilter]     = useState('All');
 
   const fetchData = async () => {
     try {
@@ -377,15 +379,100 @@ export default function AdminDashboard() {
         {/* ── Manage Menu Tab ── */}
         {activeTab === 'manage-menu' && (
           <div>
-            <h2 className="font-playfair text-2xl font-bold text-cream mb-6">Current Menu Items</h2>
+            {/* Header + search + filter */}
+            <div className="flex flex-col gap-4 mb-6">
+              <div className="flex items-center justify-between">
+                <h2 className="font-playfair text-2xl font-bold text-cream">
+                  Current Menu Items
+                  <span className="ml-3 text-sm font-normal text-cream/40 font-sans">
+                    {(() => {
+                      const filtered = menuItems.filter(i =>
+                        (menuFilter === 'All' || i.category === menuFilter) &&
+                        (i.name.toLowerCase().includes(menuSearch.toLowerCase()) || i.category.toLowerCase().includes(menuSearch.toLowerCase()))
+                      );
+                      return `${filtered.length} of ${menuItems.length}`;
+                    })()}
+                  </span>
+                </h2>
+              </div>
+
+              {/* Search + filter row */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                {/* Search */}
+                <div className="relative flex-1">
+                  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-cream/30 pointer-events-none z-10" />
+                  <input
+                    type="text"
+                    placeholder="Search by name or category…"
+                    value={menuSearch}
+                    onChange={(e) => setMenuSearch(e.target.value)}
+                    className="form-input w-full"
+                    style={{ paddingLeft: '2.5rem' }}
+                  />
+                  {menuSearch && (
+                    <button onClick={() => setMenuSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-cream/30 hover:text-cream/60 cursor-pointer">
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+
+                {/* Category filter */}
+                <select
+                  value={menuFilter}
+                  onChange={(e) => setMenuFilter(e.target.value)}
+                  className="form-input sm:w-56 shrink-0"
+                >
+                  <option value="All">All Categories</option>
+                  {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+
+                {/* Status filter toggle */}
+                <div className="flex gap-2 shrink-0">
+                  {['All', 'Active', 'Hidden'].map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => setMenuFilter(s === menuFilter ? 'All' : s)}
+                      className={`px-4 py-2 rounded-xl border text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                        menuFilter === s
+                          ? 'bg-saffron border-saffron text-charcoal'
+                          : 'border-gold/20 text-cream/50 hover:border-saffron/50 hover:text-cream'
+                      }`}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {menuItems.length === 0 ? (
               <div className="p-16 border border-gold/10 bg-charcoal-light/10 rounded-2xl text-center">
                 <List className="w-10 h-10 text-cream/15 mx-auto mb-3" />
                 <p className="text-cream/40 text-sm">No menu items yet. Add your first item using the "Add New Item" tab.</p>
               </div>
-            ) : (
+            ) : (() => {
+              const filtered = menuItems.filter(i => {
+                const matchSearch = menuSearch === '' ||
+                  i.name.toLowerCase().includes(menuSearch.toLowerCase()) ||
+                  i.category.toLowerCase().includes(menuSearch.toLowerCase());
+                const matchCat = menuFilter === 'All' || menuFilter === 'Active' || menuFilter === 'Hidden' || i.category === menuFilter;
+                const matchStatus = menuFilter === 'Active' ? i.isActive !== false
+                  : menuFilter === 'Hidden' ? i.isActive === false
+                  : true;
+                return matchSearch && matchCat && matchStatus;
+              });
+
+              if (filtered.length === 0) return (
+                <div className="p-16 border border-gold/10 bg-charcoal-light/10 rounded-2xl text-center">
+                  <Search className="w-10 h-10 text-cream/15 mx-auto mb-3" />
+                  <p className="text-cream/40 text-sm">No items match your search.</p>
+                  <button onClick={() => { setMenuSearch(''); setMenuFilter('All'); }} className="mt-3 text-xs text-saffron hover:underline cursor-pointer">Clear filters</button>
+                </div>
+              );
+
+              return (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {menuItems.map((item) => {
+                {filtered.map((item) => {
                   const isEditing = editingId === item.id;
                   const isActive  = item.isActive !== false; // default true if undefined
 
@@ -620,7 +707,8 @@ export default function AdminDashboard() {
                   );
                 })}
               </div>
-            )}
+              );
+            })()}
           </div>
         )}
 
