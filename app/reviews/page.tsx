@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Quote, ExternalLink, MessageSquarePlus, Clock, CheckCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -11,27 +10,7 @@ interface Pending { id: string; name: string; rating: number; comment: string; }
 
 /* ─── Animation variants ─────────────────────────────────────── */
 const fadeUp   = { hidden: { opacity: 0, y: 36 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] } } };
-const fadeIn   = { hidden: { opacity: 0 },         show: { opacity: 1,       transition: { duration: 0.7 } } };
 const stagger  = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
-const staggerF = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } };
-
-/* ─── Animated counter ───────────────────────────────────────── */
-function Counter({ to, suffix = '' }: { to: number; suffix?: string }) {
-  const [val, setVal] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
-  useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const step = Math.ceil(to / 40);
-    const t = setInterval(() => {
-      start += step;
-      if (start >= to) { setVal(to); clearInterval(t); } else setVal(start);
-    }, 30);
-    return () => clearInterval(t);
-  }, [inView, to]);
-  return <span ref={ref}>{val}{suffix}</span>;
-}
 
 /* ─── Luxury Review Card ─────────────────────────────────────── */
 function ReviewCard({ review, index }: { review: Review | Pending; index: number }) {
