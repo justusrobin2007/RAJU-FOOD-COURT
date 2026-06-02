@@ -57,7 +57,7 @@ export default function AdminLogin() {
             <Lock className="w-7 h-7 text-saffron" />
           </div>
           <h1 className="font-playfair text-2xl font-bold text-cream">Admin Access</h1>
-          <p className="text-xs text-cream/40 mt-1 uppercase tracking-widest">Raju Madras Cafe</p>
+          <p className="text-xs text-cream/40 mt-1 uppercase tracking-widest">Raju Food Court</p>
         </div>
 
         {/* Card */}

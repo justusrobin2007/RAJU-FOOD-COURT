@@ -112,9 +112,9 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal-dark/85 to-transparent" />
               <div className="absolute bottom-7 left-7">
-                <span className="block text-[10px] text-gold uppercase tracking-[0.25em] font-semibold mb-1.5">ESTD 1998</span>
+                <span className="block text-[10px] text-gold uppercase tracking-[0.25em] font-semibold mb-1.5">ESTD 1996</span>
                 <h3 className="font-playfair text-lg font-bold text-cream leading-snug">
-                  Over 25 Years of<br />Vegetarian Cooking
+                  Over 30 Years of<br />Vegetarian Cooking
                 </h3>
               </div>
             </motion.div>
