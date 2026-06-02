@@ -14,17 +14,32 @@ function validateMenuItem(body: any) {
   return null;
 }
 
-// Public: only active items
+const CATEGORY_ORDER = [
+  'Classic Dosa', 'Rava Specials', 'Uttapam', 'Family Dosa', 'Fusion Dosa', 'Fry Varieties',
+  'Idli & Vada', 'Rice & Pulav', 'Rice & Biryani', 'Pav Bhaji',
+  'Paneer Special', 'Veg Special', 'Special Sabji', 'Kofta',
+  'Roti & Naan', 'Dal', 'Beverages', 'Extras',
+];
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const all = searchParams.get('all') === 'true';
-    // Admin requests with session can see all items; public sees only active
     const isAdmin = all && getSessionFromRequest(req);
     const items = await db.menuItem.findMany({
       where: isAdmin ? {} : { isActive: true },
-      orderBy: { createdAt: 'desc' },
     });
+
+    // Sort by defined category order, then alphabetically within each category
+    items.sort((a, b) => {
+      const ai = CATEGORY_ORDER.indexOf(a.category);
+      const bi = CATEGORY_ORDER.indexOf(b.category);
+      const catA = ai === -1 ? 999 : ai;
+      const catB = bi === -1 ? 999 : bi;
+      if (catA !== catB) return catA - catB;
+      return a.name.localeCompare(b.name);
+    });
+
     return NextResponse.json(items);
   } catch (error) {
     console.error('Failed to fetch menu items:', error);
