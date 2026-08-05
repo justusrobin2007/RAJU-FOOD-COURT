@@ -74,7 +74,7 @@ export default function Footer() {
               Serving fresh, pure vegetarian meals in Rajkot since 1996. From a humble rolling cart to a landmark food destination.
             </p>
             <a
-              href="https://www.instagram.com/rajufoodcourt?igsh=MXdpOXNhNnUycnAzaQ=="
+              href="https://www.instagram.com/raju_foodcourt?igsh=MWd4OXhvaWE3aGd4Mg=="
               target="_blank" rel="noreferrer"
               className="w-9 h-9 inline-flex items-center justify-center border border-gold/20 rounded-full text-cream/60 hover:border-saffron hover:text-saffron transition-all duration-200"
             >
@@ -138,7 +138,7 @@ export default function Footer() {
               <span className="font-playfair text-base font-bold tracking-wider text-cream">RAJU FOOD COURT</span>
             </Link>
             <a
-              href="https://www.instagram.com/rajufoodcourt?igsh=MXdpOXNhNnUycnAzaQ=="
+              href="https://www.instagram.com/raju_foodcourt?igsh=MWd4OXhvaWE3aGd4Mg=="
               target="_blank" rel="noreferrer"
               className="w-8 h-8 flex items-center justify-center border border-gold/20 rounded-full text-cream/60 hover:border-saffron hover:text-saffron transition-all"
             >
